@@ -83,6 +83,12 @@ the goal: make `SPEC.md` as universal as `README.md`.
 - credit anyone who contributes examples or feedback publicly
 - keep the standard stable — trust is built by not breaking things
 
+### workflow
+1. write a dev.to post (markdown, canonical url pointing to site)
+2. schedule x and linkedin via [buffer](https://buffer.com) or [typefully](https://typefully.com)
+3. post reddit manually — paste the intro, link to the full post
+4. save hacker news for a deliberate moment — high traffic, fresh copy
+
 ---
 
 ## links
