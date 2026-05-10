@@ -170,6 +170,7 @@ spec-md/
 - [ ] `[website]` render schema reference from markdown  [medium]
 - [ ] `[website]` add copy-paste starter template  [easy]
 - [ ] `[website]` deploy to static host (github pages or vercel)  [easy]
+- [ ] `[core]` create CHANGELOG.md  [easy]
 
 ### ideas
 
