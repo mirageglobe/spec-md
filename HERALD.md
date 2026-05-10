@@ -41,22 +41,48 @@ the goal: make `SPEC.md` as universal as `README.md`.
 
 ## channels
 
-- **x / twitter**: short takes on agent workflows, spec-md tips, and developer productivity
-- **github**: issues, discussions, and the repo itself as the primary community hub
-- **whatsapp / communities**: share the link and a one-liner when spec-md solves a real problem someone mentions
-- **word of mouth**: the most powerful channel — if it works, people share it
+| channel          | audience                        | priority | notes                                              |
+| :--------------- | :------------------------------ | :------- | :------------------------------------------------- |
+| x / twitter      | developers, ai practitioners    | high     | short takes, tips, tag `#specmd` `#aiagents`       |
+| hacker news      | senior engineers, open-source   | high     | show hn post at launch; one shot, make it count    |
+| reddit           | broad developer community       | high     | r/programming, r/LocalLLaMA, r/MachineLearning     |
+| github           | developers, contributors        | high     | repo discussions, issues, and stars as social proof|
+| product hunt     | makers, early adopters          | medium   | launch when site and docs are polished             |
+| dev.to           | developer bloggers              | medium   | post a tutorial: "how i use spec-md with agents"  |
+| linkedin         | professional developers         | medium   | longer-form posts on ai workflow productivity      |
+| discord          | ai/llm communities              | medium   | anthropic, langchain, openai developer servers     |
+| whatsapp         | personal network                | low      | share link when relevant in conversation           |
+| youtube          | visual learners                 | low      | demos and walkthroughs; longer-term investment     |
 
 ---
 
-## how to spread the word
+## strategy
 
-- share the site: https://mirageglobe.github.io/spec-md
-- share the repo: https://github.com/mirageglobe/spec-md
-- show a real `SPEC.md` in a project and explain what it unlocked
-- tag posts with `#specmd` `#aiagents` `#developertools`
+### launch
+- publish a **show hn** post on hacker news — the highest-leverage single post for a dev tool
+- post on reddit (r/programming + r/LocalLLaMA) the same day for cross-coverage
+- announce on x with a short demo: what a codebase looks like before and after `SPEC.md`
+
+### content
+- lead with the problem (agents working blind), not the solution
+- use real examples — show a filled-in `SPEC.md` from an actual project
+- avoid feature lists; focus on outcomes ("my agent picked the right task on the first try")
+
+### milestones to shout about
+- first github star from a stranger
+- 100 stars
+- first external `SPEC.md` spotted in the wild
+- v1.0 of the standard
+
+### community
+- respond to every issue and discussion personally in the early days
+- credit anyone who contributes examples or feedback publicly
+- keep the standard stable — trust is built by not breaking things
 
 ---
 
-## support
+## links
 
-if spec-md helped you — https://buymeacoffee.com/mirageglobe
+- site: https://mirageglobe.github.io/spec-md
+- repo: https://github.com/mirageglobe/spec-md
+- support: https://buymeacoffee.com/mirageglobe
