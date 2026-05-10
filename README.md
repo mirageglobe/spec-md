@@ -35,4 +35,4 @@ copy [`template/SPEC.md`](template/SPEC.md) to your repo root and fill in each s
 
 ---
 
-MIT License — copyright (c) 2026 Jimmy MG Lim
+MIT License — copyright (c) 2026 Jimmy MG Lim — [buy me a coffee](https://buymeacoffee.com/mirageglobe)
