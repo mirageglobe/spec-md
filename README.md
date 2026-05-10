@@ -1,5 +1,7 @@
 # spec-md
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE)
+
 a standard for technical project specifications — the blueprint every codebase needs.
 
 ---
@@ -30,3 +32,7 @@ copy [`template/SPEC.md`](template/SPEC.md) to your repo root and fill in each s
 ---
 
 > see [SPEC.md](SPEC.md) for the schema reference, section definitions, and website architecture.
+
+---
+
+MIT License — copyright (c) 2026 Jimmy MG Lim
