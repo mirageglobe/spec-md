@@ -4,7 +4,7 @@
 
 help:
 	@printf "\n  \033[33mspec-md\033[0m\n"
-	@printf "\n  Usage: make <target>\n\n"
+	@printf "\n  usage: make <target>\n\n"
 	@awk '/^[a-zA-Z_-]+:.*##/ { printf "  \033[36m%-10s\033[0m %s\n", substr($$1, 1, length($$1)-1), substr($$0, index($$0, "##")+3) }' $(MAKEFILE_LIST)
 	@printf "\n"
 
