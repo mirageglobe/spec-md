@@ -8,6 +8,7 @@ help:
 	@echo "  dev      start astro dev server"
 	@echo "  build    build static site to dist/"
 	@echo "  preview  preview built site locally"
+	@echo "  upgrade  upgrade astro and dependencies"
 
 dev:
 	npm run dev
@@ -17,3 +18,6 @@ build:
 
 preview:
 	npm run preview
+
+upgrade:
+	npx @astrojs/upgrade
