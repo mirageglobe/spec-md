@@ -1,6 +1,7 @@
 # SPEC — spec-md
 
 > a standard markdown format for technical project specifications.
+> version: 0.1.0
 
 ---
 
@@ -170,7 +171,7 @@ spec-md/
 - [ ] `[website]` render schema reference from markdown  [medium]
 - [ ] `[website]` add copy-paste starter template  [easy]
 - [x] `[website]` deploy to static host (github pages or vercel)  [easy]
-- [ ] `[core]` create CHANGELOG.md  [easy]
+- [x] `[core]` create CHANGELOG.md  [easy]
 
 ### ideas
 

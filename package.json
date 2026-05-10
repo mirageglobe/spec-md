@@ -1,16 +1,15 @@
 {
-  "name": "website",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "spec-md",
+  "version": "0.1.0",
+  "description": "a standard markdown format for technical project specifications",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["spec", "markdown", "agents", "documentation"],
+  "author": "Jimmy MG Lim",
+  "license": "MIT",
   "type": "commonjs",
   "dependencies": {
     "astro": "^6.3.1"
