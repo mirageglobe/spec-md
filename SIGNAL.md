@@ -1,11 +1,11 @@
-# HERALD
+# SIGNAL
 
 > **status: alpha experiment** — name, structure, and purpose may change.
 > this file is a placeholder to explore the idea of a drop-in outreach brief standard.
 > revisit before treating it as stable or sharing it publicly.
 
-> the voice, vision, and outreach brief for this project.
-> drop this file into any repo to define how it should be represented to the world.
+> the marketing and outreach brief for this project.
+> drop this file into any repo to define the signal it puts out into the world.
 
 ---
 
