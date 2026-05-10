@@ -140,15 +140,15 @@ the spec-md website serves the spec-md standard as a static site.
 
 ```
 spec-md/
+├── src/
+│   ├── layouts/
+│   │   └── Layout.astro       # base html layout
+│   └── pages/
+│       └── index.astro        # landing page
 ├── template/
 │   └── SPEC.md                # minimal blank starter — copy to repo root
-├── website/              # astro static site
-│   ├── src/
-│   │   ├── pages/
-│   │   │   └── index.astro    # landing page
-│   │   └── content/           # markdown content (schema reference, examples)
-│   ├── public/                # static assets
-│   └── astro.config.mjs
+├── astro.config.mjs
+├── package.json
 ├── README.md
 └── SPEC.md
 ```
