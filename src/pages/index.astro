@@ -4,148 +4,296 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="spec-md">
   <style>
-    header { padding: 3rem 0 2rem; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
-    header h1 { font-size: 1.6rem; color: var(--accent); letter-spacing: 0.05em; }
-    header p { color: var(--muted); margin-top: 0.5rem; font-size: 0.9rem; }
+    /* ── base ── */
+    section { margin-bottom: 3.5rem; }
 
-    section { margin-bottom: 3rem; }
-    h2 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 1.25rem; }
-    h3 { font-size: 0.85rem; color: var(--muted); margin: 1.5rem 0 0.5rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    h2 {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
 
-    p { color: var(--text); margin-bottom: 0.75rem; }
+    p { color: var(--text); margin-bottom: 0.85rem; }
+    p.lead { font-size: 1.05rem; color: var(--text); line-height: 1.8; }
 
+    code {
+      font-family: inherit;
+      background: var(--code-bg);
+      padding: 0.1em 0.35em;
+      border: 1px solid var(--border);
+      font-size: 0.88em;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── hero ── */
+    .hero {
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 3.5rem;
+    }
+
+    .hero-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      color: var(--accent);
+      line-height: 1.25;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 520px;
+    }
+
+    /* ── problem ── */
+    .problem-box {
+      border-left: 2px solid var(--border);
+      padding: 0.1rem 0 0.1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .problem-box p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── callout ── */
+    .callout {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 0 1rem;
+      align-items: start;
+    }
+
+    .callout-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      padding-top: 0.1rem;
+    }
+
+    .callout p {
+      margin: 0;
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+
+    /* ── schema table ── */
     table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-bottom: 1rem; }
-    th { text-align: left; color: var(--muted); font-weight: normal; padding: 0.4rem 0.75rem 0.4rem 0; border-bottom: 1px solid var(--border); }
-    td { padding: 0.4rem 0.75rem 0.4rem 0; border-bottom: 1px solid var(--border); vertical-align: top; }
-    td:first-child { color: var(--accent); white-space: nowrap; }
+    th { text-align: left; color: var(--muted); font-weight: normal; padding: 0.4rem 0.75rem 0.4rem 0; border-bottom: 1px solid var(--border); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    td { padding: 0.5rem 0.75rem 0.5rem 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+    td:first-child { color: var(--accent); white-space: nowrap; width: 140px; }
+    td code { font-size: 0.8rem; }
 
+    /* ── code block ── */
     pre {
       background: var(--code-bg);
       border: 1px solid var(--border);
       padding: 1.25rem;
       overflow-x: auto;
       font-size: 0.82rem;
-      line-height: 1.6;
+      line-height: 1.65;
       margin: 0.75rem 0 1.5rem;
     }
 
-    code { font-family: inherit; }
+    .comment { color: var(--muted); }
+    .key { color: var(--accent); }
+    .done { color: #5a5a5a; text-decoration: line-through; }
+    .open { color: var(--text); }
+    .tag-comp { color: #7cb8ff; }
+    .tag-diff { color: var(--muted); }
 
-    .tag { color: var(--muted); font-size: 0.8rem; }
-
-    ul { list-style: none; padding: 0; }
-    ul li { padding: 0.25rem 0; color: var(--text); }
-    ul li::before { content: '— '; color: var(--muted); }
-
-    .rule {
-      border: 1px solid var(--border);
-      padding: 1rem 1.25rem;
-      margin-bottom: 0.75rem;
+    /* ── cta ── */
+    .cta {
+      border: 1px solid var(--accent);
+      padding: 2rem;
+      margin-top: 1rem;
     }
-    .rule strong { color: var(--accent); }
 
-    footer { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; }
-    footer a { color: var(--muted); text-decoration: none; }
-    footer a:hover { color: var(--accent); }
+    .cta h3 {
+      color: var(--accent);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .cta pre { margin-bottom: 1rem; }
+
+    .cta p { font-size: 0.85rem; color: var(--muted); margin: 0; }
+
+    /* ── footer ── */
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--accent); text-decoration: none; }
   </style>
 
-  <header>
-    <h1>spec-md</h1>
-    <p>a standard markdown format for technical project specifications.</p>
-  </header>
+  <!-- hero -->
+  <div class="hero">
+    <p class="hero-label">spec-md</p>
+    <h1>give your agents<br/>the briefing they need.</h1>
+    <p>
+      a single markdown file that tells every developer and AI agent exactly
+      how your codebase is built, what's decided, and what to work on next.
+    </p>
+  </div>
 
+  <!-- problem -->
   <section>
-    <h2>what</h2>
-    <p>
-      spec-md defines the schema for a <code>SPEC.md</code> file — the technical blueprint every codebase needs.
-      it establishes required sections, formatting conventions, and tagging rules so the spec is readable
-      by both humans and AI agents.
+    <h2>the problem</h2>
+    <p class="lead">
+      AI agents are powerful but blind. drop one into an unfamiliar codebase
+      and it'll guess at architecture, re-litigate settled decisions, and pick up
+      tasks it can't handle — because nothing told it not to.
     </p>
-    <p>
-      think of it like <code>agents.md</code> for agent behavior, or <code>.editorconfig</code> for code style —
-      but for project architecture documentation.
-    </p>
+    <div class="problem-box">
+      <p>no architecture context → wrong abstractions</p>
+      <p>no decision log → past choices relitigated</p>
+      <p>no roadmap tags → wrong tasks picked up</p>
+      <p>no complexity score → agent treads too lightly or too heavily</p>
+    </div>
   </section>
 
+  <!-- what -->
   <section>
-    <h2>why</h2>
-    <ul>
-      <li><strong>file-first</strong> — lives in the repo, versioned with the code. no wiki drift.</li>
-      <li><strong>agent-readable</strong> — structured sections and explicit tags let LLMs scope work precisely.</li>
-      <li><strong>human-readable</strong> — plain markdown, zero tooling required.</li>
-      <li><strong>opinionated but minimal</strong> — defines what goes where, not how much to write.</li>
-    </ul>
-  </section>
+    <h2>the solution</h2>
+    <p>
+      <code>SPEC.md</code> is the briefing file. four required sections, one markdown file,
+      zero tooling. lives in the repo root, versioned with the code, never drifts.
+    </p>
+    <p>
+      think of it like <code>agents.md</code> for agent behavior — but for architecture.
+      any agent or developer can read it and be productive in minutes.
+    </p>
 
-  <section>
-    <h2>required sections</h2>
     <table>
       <thead>
-        <tr>
-          <th>section</th>
-          <th>heading</th>
-          <th>purpose</th>
-        </tr>
+        <tr><th>section</th><th>heading</th><th>gives agents</th></tr>
       </thead>
       <tbody>
         <tr>
           <td>architecture</td>
           <td><code>## architecture</code></td>
-          <td>system design, components, data flow</td>
+          <td>system design, components, boundaries</td>
         </tr>
         <tr>
           <td>roadmap</td>
           <td><code>## roadmap</code></td>
-          <td>two-tier task list (near term + ideas)</td>
+          <td>open tasks scoped by component and difficulty</td>
         </tr>
         <tr>
           <td>decisions</td>
           <td><code>## decisions</code></td>
-          <td>key architectural choices and rationale</td>
+          <td>what was chosen and why — stops re-litigation</td>
         </tr>
         <tr>
           <td>complexity score</td>
           <td><code>## complexity score</code></td>
-          <td>per-dimension complexity table (1–5)</td>
+          <td>how carefully to tread, per layer</td>
         </tr>
       </tbody>
     </table>
   </section>
 
+  <!-- agent angle -->
   <section>
-    <h2>roadmap format</h2>
-    <p>two tiers only — <strong>near term</strong> (concrete, active) and <strong>ideas</strong> (exploratory, uncommitted).</p>
-    <p>each item carries two tags:</p>
-    <ul>
-      <li><code>`[component]`</code> — which subsystem the task belongs to</li>
-      <li><code>[easy]</code> / <code>[medium]</code> / <code>[hard]</code> — difficulty, for agent self-selection</li>
-    </ul>
-    <pre><code>## roadmap
+    <h2>built for agents</h2>
 
-### near term
-- [ ] `[api]` implement rate limiting  [hard]
-- [x] `[cli]` add export command  [easy]
+    <div class="callout">
+      <span class="callout-label">scope</span>
+      <p>component tags <code>`[api]`</code> <code>`[cli]`</code> <code>`[ui]`</code> tell an agent exactly which subsystem a task belongs to — no guessing, no sprawl.</p>
+    </div>
 
-### ideas
-- [ ] `[ui]` dark mode toggle  [medium]</code></pre>
+    <div class="callout">
+      <span class="callout-label">select</span>
+      <p>difficulty tags <code>[easy]</code> <code>[medium]</code> <code>[hard]</code> let agents self-select appropriate tasks without human triage.</p>
+    </div>
+
+    <div class="callout">
+      <span class="callout-label">trust</span>
+      <p>the decisions section is a settled record. agents read it and move on — they don't propose alternatives to choices already made.</p>
+    </div>
+
+    <div class="callout">
+      <span class="callout-label">calibrate</span>
+      <p>the complexity score tells an agent how much care a change requires before it touches anything. a 4/5 storage layer gets different treatment than a 1/5 config file.</p>
+    </div>
   </section>
 
+  <!-- example -->
   <section>
-    <h2>conventions</h2>
-    <div class="rule"><strong>placement</strong> — <code>SPEC.md</code> at repo root, alongside <code>README.md</code>.</div>
-    <div class="rule"><strong>audience split</strong> — README for users (features, quick start). SPEC for developers and agents (architecture, decisions, roadmap). roadmap lives exclusively in SPEC.md.</div>
-    <div class="rule"><strong>section order</strong> — architecture → roadmap → decisions → complexity score.</div>
-    <div class="rule"><strong>formatting</strong> — lowercase prose. table separators padded to column width. ascii diagrams over image embeds.</div>
+    <h2>example</h2>
+    <pre><code><span class="comment"># SPEC — my-project</span>
+
+<span class="key">## architecture</span>
+rest api (go) → postgres → s3 for assets.
+auth via jwt; no session state on the server.
+
+<span class="key">## roadmap</span>
+
+<span class="comment">### near term</span>
+<span class="done">- [x] `[api]` basic crud endpoints  [easy]</span>
+<span class="open">- [ ] <span class="tag-comp">`[api]`</span> rate limiting  <span class="tag-diff">[hard]</span></span>
+<span class="open">- [ ] <span class="tag-comp">`[cli]`</span> export command  <span class="tag-diff">[medium]</span></span>
+
+<span class="comment">### ideas</span>
+<span class="open">- [ ] <span class="tag-comp">`[ui]`</span> dark mode toggle  <span class="tag-diff">[easy]</span></span>
+
+<span class="key">## decisions</span>
+- <span class="key">**jwt over sessions**</span>: stateless; scales horizontally without shared cache.
+- <span class="key">**postgres over nosql**</span>: relational model fits the data; team knows sql.
+
+<span class="key">## complexity score</span>
+| dimension | score  | notes                        |
+| :-------- | :----- | :--------------------------- |
+| overall   | 3 / 5  | moderate; async job queue    |
+| api       | 2 / 5  | thin rest layer              |
+| storage   | 4 / 5  | custom migrations, no orm    |</code></pre>
   </section>
 
+  <!-- cta -->
   <section>
-    <h2>quick start</h2>
-    <p>copy the blank template into your repo root:</p>
-    <pre><code>curl -O https://raw.githubusercontent.com/mirageglobe/spec-md/main/template/SPEC.md</code></pre>
-    <p>or browse <a href="https://github.com/mirageglobe/spec-md/blob/main/template/SPEC.md">template/SPEC.md</a> on GitHub.</p>
+    <div class="cta">
+      <h3>get started in 30 seconds</h3>
+      <pre><code>curl -O https://raw.githubusercontent.com/mirageglobe/spec-md/main/template/SPEC.md</code></pre>
+      <p>
+        drop <code>SPEC.md</code> in your repo root and fill in each section. —
+        or browse the <a href="https://github.com/mirageglobe/spec-md/blob/main/template/SPEC.md">blank template</a>
+        and <a href="https://github.com/mirageglobe/spec-md/blob/main/SPEC.md">worked example</a> on GitHub.
+      </p>
+    </div>
   </section>
 
   <footer>
     <a href="https://github.com/mirageglobe/spec-md">github.com/mirageglobe/spec-md</a>
+    <span>spec-md standard</span>
   </footer>
 </Layout>
