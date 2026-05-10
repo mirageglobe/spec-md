@@ -1,0 +1,151 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="spec-md">
+  <style>
+    header { padding: 3rem 0 2rem; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
+    header h1 { font-size: 1.6rem; color: var(--accent); letter-spacing: 0.05em; }
+    header p { color: var(--muted); margin-top: 0.5rem; font-size: 0.9rem; }
+
+    section { margin-bottom: 3rem; }
+    h2 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 1.25rem; }
+    h3 { font-size: 0.85rem; color: var(--muted); margin: 1.5rem 0 0.5rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+    p { color: var(--text); margin-bottom: 0.75rem; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-bottom: 1rem; }
+    th { text-align: left; color: var(--muted); font-weight: normal; padding: 0.4rem 0.75rem 0.4rem 0; border-bottom: 1px solid var(--border); }
+    td { padding: 0.4rem 0.75rem 0.4rem 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+    td:first-child { color: var(--accent); white-space: nowrap; }
+
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      padding: 1.25rem;
+      overflow-x: auto;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      margin: 0.75rem 0 1.5rem;
+    }
+
+    code { font-family: inherit; }
+
+    .tag { color: var(--muted); font-size: 0.8rem; }
+
+    ul { list-style: none; padding: 0; }
+    ul li { padding: 0.25rem 0; color: var(--text); }
+    ul li::before { content: '— '; color: var(--muted); }
+
+    .rule {
+      border: 1px solid var(--border);
+      padding: 1rem 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+    .rule strong { color: var(--accent); }
+
+    footer { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+  </style>
+
+  <header>
+    <h1>spec-md</h1>
+    <p>a standard markdown format for technical project specifications.</p>
+  </header>
+
+  <section>
+    <h2>what</h2>
+    <p>
+      spec-md defines the schema for a <code>SPEC.md</code> file — the technical blueprint every codebase needs.
+      it establishes required sections, formatting conventions, and tagging rules so the spec is readable
+      by both humans and AI agents.
+    </p>
+    <p>
+      think of it like <code>agents.md</code> for agent behavior, or <code>.editorconfig</code> for code style —
+      but for project architecture documentation.
+    </p>
+  </section>
+
+  <section>
+    <h2>why</h2>
+    <ul>
+      <li><strong>file-first</strong> — lives in the repo, versioned with the code. no wiki drift.</li>
+      <li><strong>agent-readable</strong> — structured sections and explicit tags let LLMs scope work precisely.</li>
+      <li><strong>human-readable</strong> — plain markdown, zero tooling required.</li>
+      <li><strong>opinionated but minimal</strong> — defines what goes where, not how much to write.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>required sections</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>section</th>
+          <th>heading</th>
+          <th>purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>architecture</td>
+          <td><code>## architecture</code></td>
+          <td>system design, components, data flow</td>
+        </tr>
+        <tr>
+          <td>roadmap</td>
+          <td><code>## roadmap</code></td>
+          <td>two-tier task list (near term + ideas)</td>
+        </tr>
+        <tr>
+          <td>decisions</td>
+          <td><code>## decisions</code></td>
+          <td>key architectural choices and rationale</td>
+        </tr>
+        <tr>
+          <td>complexity score</td>
+          <td><code>## complexity score</code></td>
+          <td>per-dimension complexity table (1–5)</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>roadmap format</h2>
+    <p>two tiers only — <strong>near term</strong> (concrete, active) and <strong>ideas</strong> (exploratory, uncommitted).</p>
+    <p>each item carries two tags:</p>
+    <ul>
+      <li><code>`[component]`</code> — which subsystem the task belongs to</li>
+      <li><code>[easy]</code> / <code>[medium]</code> / <code>[hard]</code> — difficulty, for agent self-selection</li>
+    </ul>
+    <pre><code>## roadmap
+
+### near term
+- [ ] `[api]` implement rate limiting  [hard]
+- [x] `[cli]` add export command  [easy]
+
+### ideas
+- [ ] `[ui]` dark mode toggle  [medium]</code></pre>
+  </section>
+
+  <section>
+    <h2>conventions</h2>
+    <div class="rule"><strong>placement</strong> — <code>SPEC.md</code> at repo root, alongside <code>README.md</code>.</div>
+    <div class="rule"><strong>audience split</strong> — README for users (features, quick start). SPEC for developers and agents (architecture, decisions, roadmap). roadmap lives exclusively in SPEC.md.</div>
+    <div class="rule"><strong>section order</strong> — architecture → roadmap → decisions → complexity score.</div>
+    <div class="rule"><strong>formatting</strong> — lowercase prose. table separators padded to column width. ascii diagrams over image embeds.</div>
+  </section>
+
+  <section>
+    <h2>quick start</h2>
+    <p>copy the blank template into your repo root:</p>
+    <pre><code>curl -O https://raw.githubusercontent.com/mirageglobe/spec-md/main/template/SPEC.md</code></pre>
+    <p>or browse <a href="https://github.com/mirageglobe/spec-md/blob/main/template/SPEC.md">template/SPEC.md</a> on GitHub.</p>
+  </section>
+
+  <footer>
+    <a href="https://github.com/mirageglobe/spec-md">github.com/mirageglobe/spec-md</a>
+  </footer>
+</Layout>
