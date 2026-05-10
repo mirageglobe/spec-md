@@ -2,6 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE)
 
+website: https://mirageglobe.github.io/spec-md
+
 a standard for technical project specifications — the blueprint every codebase needs.
 
 ---
