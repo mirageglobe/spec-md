@@ -169,7 +169,7 @@ spec-md/
 - [ ] `[website]` scaffold astro site with index page  [easy]
 - [ ] `[website]` render schema reference from markdown  [medium]
 - [ ] `[website]` add copy-paste starter template  [easy]
-- [ ] `[website]` deploy to static host (github pages or vercel)  [easy]
+- [x] `[website]` deploy to static host (github pages or vercel)  [easy]
 - [ ] `[core]` create CHANGELOG.md  [easy]
 
 ### ideas
