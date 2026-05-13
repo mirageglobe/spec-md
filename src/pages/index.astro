@@ -141,6 +141,25 @@ import Layout from '../layouts/Layout.astro';
 
     .cta p { font-size: 0.85rem; color: var(--muted); margin: 0; }
 
+    /* ── nav ── */
+    nav {
+      display: flex;
+      justify-content: flex-end;
+      padding: 1.25rem 0 0;
+      margin-bottom: 2rem;
+    }
+
+    nav a {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.75rem;
+      border-radius: 4px;
+    }
+
+    nav a:hover { color: var(--accent); border-color: var(--accent); }
+
     /* ── footer ── */
     footer {
       margin-top: 4rem;
@@ -155,6 +174,10 @@ import Layout from '../layouts/Layout.astro';
     footer a { color: var(--muted); }
     footer a:hover { color: var(--accent); text-decoration: none; }
   </style>
+
+  <nav>
+    <a href="https://github.com/mirageglobe/spec-md">github</a>
+  </nav>
 
   <!-- hero -->
   <div class="hero">
