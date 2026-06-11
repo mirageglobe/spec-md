@@ -23,22 +23,22 @@ spec-md defines the schema for a `SPEC.md` file. it establishes required and opt
 
 ### 2.1 required sections
 
-| section | heading | purpose |
-| :--- | :--- | :--- |
-| architecture | `## architecture` | high-level system design, components, data flow |
-| roadmap | `## roadmap` | two-tier task list (near term + ideas) |
-| decisions | `## decisions` | key architectural choices and rationale |
-| complexity score | `## complexity score` | per-dimension complexity table |
+| section          | heading               | purpose                                         |
+| :--------------- | :-------------------- | :---------------------------------------------- |
+| architecture     | `## architecture`     | high-level system design, components, data flow |
+| roadmap          | `## roadmap`          | four-tier task list (bugs/near term/ideas/done) |
+| decisions        | `## decisions`        | key architectural choices and rationale         |
+| complexity score | `## complexity score` | per-dimension complexity table                  |
 
 ### 2.2 optional sections
 
-| section | heading | purpose |
-| :--- | :--- | :--- |
-| technology stack | `## technology stack` | dependencies, versions, purpose |
-| file structure | `## file structure` | directory tree with annotations |
-| build & run | `## build & run` | local setup commands |
-| releasing | `## releasing` | version bump and publish steps |
-| key bindings | `## key bindings` | input mapping table (for interactive tools) |
+| section          | heading               | purpose                                     |
+| :--------------- | :-------------------- | :------------------------------------------ |
+| technology stack | `## technology stack` | dependencies, versions, purpose             |
+| file structure   | `## file structure`   | directory tree with annotations             |
+| build & run      | `## build & run`      | local setup commands                        |
+| releasing        | `## releasing`        | version bump and publish steps              |
+| key bindings     | `## key bindings`     | input mapping table (for interactive tools) |
 
 ---
 
@@ -57,17 +57,22 @@ ascii diagrams are preferred over external image links for portability.
 
 ### 3.2 roadmap
 
-two tiers only. no other headings inside roadmap.
+four tiers in order: bugs → near term → ideas → done. no other headings inside roadmap.
 
 ```markdown
 ## roadmap
 
+### bugs
+- [ ] `[component]` confirmed defect  [easy]
+
 ### near term
 - [ ] `[component]` concrete task  [easy]
-- [x] `[component]` completed task  [medium]
 
 ### ideas
 - [ ] `[component]` exploratory, uncommitted idea  [hard]
+
+### done
+- [x] `[component]` completed task  [medium]
 ```
 
 **component tag** — `[name]` in backticks identifies the subsystem or tool. must match a real component in the architecture section.
@@ -76,7 +81,7 @@ two tiers only. no other headings inside roadmap.
 
 **status** — `[x]` completed, `[ ]` open. no other states.
 
-near term: concrete, actively worked or planned. ideas: exploratory, no commitment.
+bugs: confirmed defects, regression risks. near term: concrete, actively worked or planned. ideas: exploratory, no commitment. done: completed items moved here from any tier.
 
 ### 3.3 decisions
 
@@ -115,10 +120,10 @@ always include an `overall` row. add one row per major component or layer. prefe
 
 ### audience split
 
-| file | audience | include | exclude |
-| :--- | :--- | :--- | :--- |
-| `README.md` | end users | features, quick start, ethos | internals, build steps, roadmap |
-| `SPEC.md` | developers, agents | architecture, decisions, roadmap | marketing prose, user-facing config |
+| file        | audience           | include                          | exclude                             |
+| :---------- | :----------------- | :------------------------------- | :---------------------------------- |
+| `README.md` | end users          | features, quick start, ethos     | internals, build steps, roadmap     |
+| `SPEC.md`   | developers, agents | architecture, decisions, roadmap | marketing prose, user-facing config |
 
 roadmap lives **exclusively** in `SPEC.md`. `README.md` links to it.
 
@@ -135,7 +140,7 @@ required sections appear in this order: architecture → roadmap → decisions �
 
 ---
 
-## 5. website architecture
+## 5. architecture
 
 the spec-md website serves the spec-md standard as a static site.
 
@@ -162,16 +167,12 @@ spec-md/
 
 ## 6. roadmap
 
+### bugs
+
 ### near term
 
-- [x] `[core]` initial setup  [easy]
-- [ ] `[spec]` define core schema (sections 2–4)  [medium]
 - [ ] `[spec]` add worked examples for all required sections  [easy]
-- [ ] `[website]` scaffold astro site with index page  [easy]
 - [ ] `[website]` render schema reference from markdown  [medium]
-- [ ] `[website]` add copy-paste starter template  [easy]
-- [x] `[website]` deploy to static host (github pages or vercel)  [easy]
-- [x] `[core]` create CHANGELOG.md  [easy]
 
 ### ideas
 
@@ -180,13 +181,22 @@ spec-md/
 - [ ] `[website]` interactive schema explorer  [medium]
 - [ ] `[website]` gallery of real-world SPEC.md examples from open-source repos  [medium]
 
+### done
+
+- [x] `[core]` initial setup  [easy]
+- [x] `[spec]` define core schema (sections 2–4)  [medium]
+- [x] `[website]` scaffold astro site with index page  [easy]
+- [x] `[website]` add copy-paste starter template  [easy]
+- [x] `[website]` deploy to static host (github pages or vercel)  [easy]
+- [x] `[core]` create CHANGELOG.md  [easy]
+
 ---
 
 ## 7. decisions
 
 - **markdown over custom format**: portability and zero tooling required. any text editor, any agent.
 - **repo-root placement**: versioned with code; prevents wiki drift.
-- **two-tier roadmap**: near term forces prioritisation; ideas section captures intent without commitment.
+- **four-tier roadmap**: bugs surfaces defects; near term forces prioritisation; ideas captures intent without commitment; done preserves history.
 - **difficulty tags**: lets agents self-select appropriately scoped tasks without human triage.
 - **component tags**: scopes work to a subsystem; prevents agents from over-reaching.
 - **complexity score**: gives agents and reviewers a calibrated sense of risk before making changes.
@@ -196,8 +206,8 @@ spec-md/
 
 ## 8. complexity score
 
-| dimension | score | notes |
-| :--- | :--- | :--- |
-| overall | 1 / 5 | content project; no runtime logic |
-| spec | 1 / 5 | prose schema, no code |
-| website | 2 / 5 | astro static site, markdown rendering |
+| dimension | score | notes                                 |
+| :-------- | :---- | :------------------------------------ |
+| overall   | 1 / 5 | content project; no runtime logic     |
+| spec      | 1 / 5 | prose schema, no code                 |
+| website   | 2 / 5 | astro static site, markdown rendering |

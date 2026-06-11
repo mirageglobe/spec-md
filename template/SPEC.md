@@ -12,6 +12,8 @@
 
 ## roadmap
 
+### bugs
+
 ### near term
 
 - [ ] `[component]` task description  [easy]
@@ -19,6 +21,8 @@
 ### ideas
 
 - [ ] `[component]` exploratory idea  [medium]
+
+### done
 
 ---
 
@@ -30,6 +34,6 @@
 
 ## complexity score
 
-| dimension | score | notes |
-| :--- | :--- | :--- |
-| overall | 1 / 5 | [brief note] |
+| dimension | score | notes        |
+| :-------- | :---- | :----------- |
+| overall   | 1 / 5 | [brief note] |
