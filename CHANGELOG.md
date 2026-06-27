@@ -9,6 +9,18 @@ versioning follows [semantic versioning](https://semver.org/).
 
 ## [unreleased]
 
+### added
+
+- optional sections: overview, principles, milestones (with worked examples)
+- `[~]` in progress / partial roadmap status marker
+- conventions: agent-safety annotations, satellite docs, heading-numbering rule
+- worked examples for technology stack and file-structure sections
+
+### changed
+
+- decisions may now use a `decision / choice / why` table for many entries (flat list still preferred for a few)
+- `template/SPEC.md`: version line, status legend, optional-sections pointer
+
 ---
 
 ## [0.1.0] — 2026-05-10
