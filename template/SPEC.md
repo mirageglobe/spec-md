@@ -1,6 +1,7 @@
 # SPEC — [project name]
 
 > [one-line description of the project]
+> version: 0.1.0
 
 ---
 
@@ -11,6 +12,8 @@
 ---
 
 ## roadmap
+
+<!-- status: [x] done · [~] in progress / partial · [ ] open -->
 
 ### bugs
 
@@ -37,3 +40,10 @@
 | dimension | score | notes        |
 | :-------- | :---- | :----------- |
 | overall   | 1 / 5 | [brief note] |
+
+<!--
+optional sections (add as needed; see SPEC.md schema for each):
+## overview · ## technology stack · ## principles · ## file structure
+## milestones · ## build & run · ## releasing · ## key bindings
+-->
+

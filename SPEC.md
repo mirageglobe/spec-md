@@ -1,7 +1,7 @@
 # SPEC — spec-md
 
 > a standard markdown format for technical project specifications.
-> version: 0.1.0
+> version: 0.2.0
 
 ---
 
@@ -32,13 +32,16 @@ spec-md defines the schema for a `SPEC.md` file. it establishes required and opt
 
 ### 2.2 optional sections
 
-| section          | heading               | purpose                                     |
-| :--------------- | :-------------------- | :------------------------------------------ |
-| technology stack | `## technology stack` | dependencies, versions, purpose             |
-| file structure   | `## file structure`   | directory tree with annotations             |
-| build & run      | `## build & run`      | local setup commands                        |
-| releasing        | `## releasing`        | version bump and publish steps              |
-| key bindings     | `## key bindings`     | input mapping table (for interactive tools) |
+| section          | heading               | purpose                                         |
+| :--------------- | :-------------------- | :---------------------------------------------- |
+| overview         | `## overview`         | tldr summary; expands the title blockquote      |
+| technology stack | `## technology stack` | dependencies as name / version / purpose        |
+| principles       | `## principles`       | scope-containment and no-drift rules for agents |
+| file structure   | `## file structure`   | annotated directory tree                        |
+| build & run      | `## build & run`      | local setup and run commands                    |
+| milestones       | `## milestones`       | phased delivery schedule for larger projects    |
+| releasing        | `## releasing`        | version bump and publish steps                  |
+| key bindings     | `## key bindings`     | input mapping table (for interactive tools)     |
 
 ---
 
@@ -79,7 +82,7 @@ four tiers in order: bugs → near term → ideas → done. no other headings in
 
 **difficulty tag** — one of `[easy]`, `[medium]`, `[hard]`. placed at end of line after two spaces.
 
-**status** — `[x]` completed, `[ ]` open. no other states.
+**status** — `[x]` completed, `[~]` in progress / partial, `[ ]` open. no other states.
 
 bugs: confirmed defects, regression risks. near term: concrete, actively worked or planned. ideas: exploratory, no commitment. done: completed items moved here from any tier.
 
@@ -93,7 +96,7 @@ a flat list of architectural choices. each entry: decision name in bold, what wa
 - **file location**: repo root. ensures versioning with the code; not buried in a wiki.
 ```
 
-no tables, no sub-headings. decisions should be short — one to three sentences each.
+a flat list suits a few decisions; once they grow many, a `decision / choice / why` table is acceptable. no sub-headings. decisions should be short — one to three sentences each.
 
 ### 3.4 complexity score
 
@@ -109,6 +112,71 @@ a table rating complexity per dimension on a 1–5 scale.
 ```
 
 always include an `overall` row. add one row per major component or layer. prefer generating or updating the score with a large model for accuracy.
+
+### 3.5 overview
+
+an optional expanded summary that opens the spec, richer than the title blockquote. use a `## overview` or `## tldr` heading. one short paragraph stating what the project is, the core technical bet, and what it prioritises over what. keep marketing prose out; this is the developer-facing precis.
+
+### 3.6 principles
+
+scope-containment and no-drift rules. this is the highest-value section for agents: it states what NOT to build and where the boundaries are, so an agent does not over-reach.
+
+```markdown
+## principles
+- **simplicity first**: apply deltas in order; no rollback machinery. fix bugs at the source.
+- **no just-in-case**: do not implement a feature until the engine needs it.
+- **boundary**: if a feature does not write state to the ledger, it is not core simulation.
+```
+
+prefer short imperative rules. include explicit out-of-scope statements and module boundary contracts where they exist.
+
+### 3.7 technology stack
+
+a table of dependencies. three columns: name, version, purpose. pin a version (or `-` if not pinned). one row per significant dependency or layer.
+
+```markdown
+## technology stack
+| dependency        | version | purpose                     |
+| :---------------- | :------ | :-------------------------- |
+| `bubbletea`       | v2.0.6  | TUI runtime, MVU event loop |
+| Go stdlib         | -       | I/O, process execution      |
+```
+
+### 3.8 file structure
+
+under a `## file structure` heading, a directory tree in a fenced code block with an inline `# comment` annotation on each significant path stating what it owns. annotate, do not just list:
+
+```
+internal/
+  core/        # pure simulation; zero UI imports
+  engine/      # turn loop; serialises to save.json
+  ui/          # dumb view; reads state, sends commands
+```
+
+### 3.9 milestones
+
+for larger projects, a phased delivery schedule layered above the roadmap. the roadmap stays the flat four-tier task list; milestones group those tasks into ordered phases with a status column. use the same status markers as the roadmap (`[x]` / `[~]` / `[ ]`).
+
+```markdown
+## milestones
+| milestone | focus                          | status          |
+| :-------- | :----------------------------- | :-------------- |
+| 0         | scaffold, makefile, data load  | [x] done        |
+| 1         | engine core, turn loop         | [~] in progress |
+| 2         | TUI shell, playable loop       | [ ] not started |
+```
+
+milestones describe the schedule; the roadmap holds the actual tasks. do not duplicate task lists across both.
+
+### 3.10 agent-safety annotations
+
+any section describing a destructive, outward-facing, or shared-state operation (releasing, deploying, migrations) must carry an agent-safety callout so automation does not run it autonomously. place a blockquote at the top of the section:
+
+```markdown
+> **for AI agents:** ask the user before proceeding. present each step as a manual command for the user to run; do NOT execute autonomously. these commands affect shared state. guide one phase at a time and wait for confirmation.
+```
+
+the callout names the risk (shared git history, remote state, data loss) and instructs one-phase-at-a-time, human-confirmed execution.
 
 ---
 
@@ -126,6 +194,14 @@ always include an `overall` row. add one row per major component or layer. prefe
 | `SPEC.md`   | developers, agents | architecture, decisions, roadmap | marketing prose, user-facing config |
 
 roadmap lives **exclusively** in `SPEC.md`. `README.md` links to it.
+
+### satellite docs
+
+domain-heavy projects may add a third document for content that is neither user manual nor architecture (e.g. `DESIGN.md` for game rules, `API.md` for endpoint contracts). `SPEC.md` stays the architecture blueprint and links out to the satellite doc; it does not absorb that content. the two-file rule (README / SPEC) is the default, not a ceiling.
+
+### headings
+
+heading numbering (`## 1. overview`) is optional but must be consistent within a file: number all top-level headings or none. section names and order are fixed regardless of numbering.
 
 ### formatting
 
@@ -189,6 +265,8 @@ spec-md/
 - [x] `[website]` add copy-paste starter template  [easy]
 - [x] `[website]` deploy to static host (github pages or vercel)  [easy]
 - [x] `[core]` create CHANGELOG.md  [easy]
+- [x] `[spec]` add optional sections (overview, principles, milestones) with worked examples  [medium]
+- [x] `[spec]` allow decision tables and `[~]` in-progress status; add agent-safety, tech-stack, file-tree, satellite-doc conventions  [medium]
 
 ---
 
@@ -201,6 +279,11 @@ spec-md/
 - **component tags**: scopes work to a subsystem; prevents agents from over-reaching.
 - **complexity score**: gives agents and reviewers a calibrated sense of risk before making changes.
 - **astro for website**: zero-js output by default; markdown-first; minimal config for a static docs site.
+- **tri-state status**: added `[~]` in progress / partial alongside `[x]` / `[ ]`. real specs need a partial state; binary done/open loses information.
+- **decision tables allowed**: flat list for a few decisions, table for many. two sibling specs both used tables; the strict no-table rule did not survive contact.
+- **principles section**: codifies scope-containment / no-drift rules. the highest-value section for keeping an agent in its lane; more directive than the roadmap.
+- **agent-safety annotations**: destructive sections (releasing, deploying, migrations) carry a human-gate callout so automation does not run them autonomously.
+- **satellite docs allowed**: a third doc (e.g. `DESIGN.md`) for domain content SPEC should not absorb; SPEC links out. two-file rule is the default, not a ceiling.
 
 ---
 
