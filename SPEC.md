@@ -250,13 +250,13 @@ spec-md/
 - [x] `[core]` create CHANGELOG.md  [easy]
 - [x] `[spec]` add optional sections (overview, principles, milestones) with worked examples  [medium]
 - [x] `[spec]` allow decision tables and `[~]` in-progress status; add agent-safety, satellite-doc, heading conventions  [medium]
+- [ ] `[website]` gallery of real-world SPEC.md examples from open-source repos  [medium]
 
 ### ideas
 
 - [ ] `[spec]` json schema / zod validator for SPEC.md lint  [hard]
 - [ ] `[spec]` cli tool: `spec-md lint` checks a SPEC.md against the schema  [hard]
 - [ ] `[website]` interactive schema explorer  [medium]
-- [ ] `[website]` gallery of real-world SPEC.md examples from open-source repos  [medium]
 
 ---
 
