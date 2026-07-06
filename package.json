@@ -12,6 +12,6 @@
   "license": "MIT",
   "type": "commonjs",
   "dependencies": {
-    "astro": "^6.3.1"
+    "astro": "^7.0.6"
   }
 }
