@@ -19,6 +19,7 @@ versioning follows [semantic versioning](https://semver.org/).
 - milestone detail blocks (depends on, done when, verify) and a closing verification milestone convention
 - roadmap item-quality rule: discrete checks, verbatim values, `file:line` pointers, `(illustrative - confirm)` tag
 - optional header fields: status, owner, success metric
+- `examples/SPEC.md`: a short filled-out worked example using the required and most optional sections
 
 ### changed
 
