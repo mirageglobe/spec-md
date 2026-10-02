@@ -37,11 +37,15 @@ spec-md defines the schema for a `SPEC.md` file. it establishes required and opt
 | overview | `## overview` | tldr summary; expands the title blockquote |
 | technology stack | `## technology stack` | dependencies as name / version / purpose |
 | principles | `## principles` | scope-containment and no-drift rules for agents |
+| constraints | `## constraints` | what the project must build on and must not disturb |
+| non-goals | `## non-goals` | features deliberately excluded or deferred, with reason |
 | file structure | `## file structure` | annotated directory tree |
 | build & run | `## build & run` | local setup and run commands |
 | milestones | `## milestones` | phased delivery schedule for larger projects |
 | releasing | `## releasing` | version bump and publish steps |
 | key bindings | `## key bindings` | input mapping table (for interactive tools) |
+| open questions | `## open questions` | unknowns only the implementer can settle in-flight |
+| risks | `## risks` | what could fail, each tied to what will catch it |
 
 ---
 
@@ -80,6 +84,8 @@ two tiers only. no other headings inside roadmap.
 **status** — `[x]` completed, `[~]` in progress / partial, `[ ]` open. no other states.
 
 near term: concrete, actively worked or planned. ideas: exploratory, no commitment.
+
+**item quality** - each near-term item is one discrete, checkable outcome, not a theme. state exact values and copy verbatim ("hero pill reads 'next live cohort: late june 2026'", not "update the hero"). point at existing code as `path/file.ext:line`. a numeric threshold, weight or limit the owner has not decided is tagged `(illustrative - confirm)` so it is never read as a decision.
 
 ### 3.3 decisions
 
@@ -163,6 +169,17 @@ for larger projects, a phased delivery schedule layered above the roadmap. the r
 
 milestones describe the schedule; the roadmap holds the actual tasks. do not duplicate task lists across both.
 
+for a milestone that needs more than a status, add a detail block under the table. it states ordering and acceptance only; the tasks stay in the roadmap.
+
+```markdown
+### milestone 1 - engine core
+depends on: milestone 0 · unblocks: milestone 2
+done when: a full turn runs headless and appends to the ledger.
+verify: `make test` passes; one manual 12-turn smoke run.
+```
+
+order milestones by dependency. the last milestone is conventionally a verification milestone: the merge gate that runs the project's standard pre-merge check once, rather than repeating test items inside every feature milestone.
+
 ### 3.10 agent-safety annotations
 
 any section describing a destructive, outward-facing, or shared-state operation (releasing, deploying, migrations) must carry an agent-safety callout so automation does not run it autonomously. place a blockquote at the top of the section:
@@ -173,6 +190,51 @@ any section describing a destructive, outward-facing, or shared-state operation 
 
 the callout names the risk (shared git history, remote state, data loss) and instructs one-phase-at-a-time, human-confirmed execution.
 
+### 3.11 constraints
+
+what the project has to live within. it matters most when the builder does not own the surrounding systems: it stops an agent proposing to rip out a sanctioned tool, add an unapproved one, or take a real-world action unprompted. include only the lines that apply; skip the section when the build has a free hand and touches nothing real.
+
+```markdown
+## constraints
+- **build on**: postgres 15 (managed); no new datastores.
+- **must not change**: public api v1 response shapes.
+- **tools it may add**: none without sign-off.
+- **data & safety**: pii stays in region; outbound email is staged for human approval, never sent automatically.
+```
+
+constraints are facts about the environment; rules about how to build belong in `## principles`.
+
+### 3.12 non-goals
+
+features deliberately left out, so an agent does not build them and a reader does not assume them. one flat list; each line carries a reason and is labelled either `deliberate` (we are not doing this) or `deferred` (not yet, with the trigger that reopens it).
+
+```markdown
+## non-goals
+- multi-region failover - *deliberate; single region until traffic justifies it*
+- offline mode - *deferred; revisit when the mobile client ships*
+```
+
+keep one combined list. splitting it into "out of scope" and "future" invites overlap. `## principles` holds rules of conduct; `## non-goals` holds features.
+
+### 3.13 open questions
+
+unknowns only the implementer can answer while building. a question that would change how the work is structured (a storage pattern, a join key, a compliance call) is a decision and belongs in `## decisions`, resolved before the build, not parked here. when a question is answered, move the answer to decisions and delete the line.
+
+```markdown
+## open questions
+- does the vendor sandbox enforce the production rate limit? confirm in milestone 2.
+```
+
+### 3.14 risks
+
+what could make the work fail, in two kinds: `[technical]` (the build itself breaks) and `[strategic]` (it ships but does not achieve the success metric). a risk that would change a milestone's shape is a missed decision; resolve it rather than recording it. each risk names what will catch it.
+
+```markdown
+## risks
+- `[technical]` webhook retries may double-submit under load. caught by: milestone 2 verification.
+- `[strategic]` buyers may ignore the routing and book a call anyway. caught by: the success metric in the header.
+```
+
 ---
 
 ## 4. conventions
@@ -180,6 +242,16 @@ the callout names the risk (shared git history, remote state, data loss) and ins
 ### file placement
 
 `SPEC.md` lives at the repository root alongside `README.md`.
+
+### header fields
+
+the title blockquote may carry extra lines after `version`: `status` (draft, active, maintenance), `owner`, and `success metric` (one measurable outcome that will be true if the work succeeds). add a success metric only if one genuinely exists; a vague one is worse than none.
+
+```markdown
+> version: 0.2.0
+> status: active · owner: jimmy
+> success metric: cut discovery-call qualification time by 50%
+```
 
 ### audience split
 
@@ -207,7 +279,7 @@ heading numbering (`## 1. overview`) is optional but must be consistent within a
 
 ### section order
 
-required sections appear in this order: architecture → roadmap → decisions → complexity score. optional sections may be interspersed between required ones as needed.
+required sections appear in this order: architecture → roadmap → decisions → complexity score. optional sections may be interspersed between required ones as needed. suggested placement: `overview`, `constraints`, `principles` and `non-goals` before architecture; `milestones` beside the roadmap; `open questions` and `risks` after complexity score.
 
 ---
 
@@ -238,25 +310,7 @@ spec-md/
 
 ## 6. roadmap
 
-### near term
-
-- [x] `[core]` initial setup  [easy]
-- [ ] `[spec]` define core schema (sections 2–4)  [medium]
-- [ ] `[spec]` add worked examples for all required sections  [easy]
-- [ ] `[website]` scaffold astro site with index page  [easy]
-- [ ] `[website]` render schema reference from markdown  [medium]
-- [ ] `[website]` add copy-paste starter template  [easy]
-- [x] `[website]` deploy to static host (github pages or vercel)  [easy]
-- [x] `[core]` create CHANGELOG.md  [easy]
-- [x] `[spec]` add optional sections (overview, principles, milestones) with worked examples  [medium]
-- [x] `[spec]` allow decision tables and `[~]` in-progress status; add agent-safety, satellite-doc, heading conventions  [medium]
-- [ ] `[website]` gallery of real-world SPEC.md examples from open-source repos  [medium]
-
-### ideas
-
-- [ ] `[spec]` json schema / zod validator for SPEC.md lint  [hard]
-- [ ] `[spec]` cli tool: `spec-md lint` checks a SPEC.md against the schema  [hard]
-- [ ] `[website]` interactive schema explorer  [medium]
+plans for spec-md are tracked outside this repo, in the maintainer's notes. this heading stays so the file still follows its own schema.
 
 ---
 
