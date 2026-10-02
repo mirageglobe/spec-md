@@ -41,5 +41,7 @@
 optional sections (add as needed; see SPEC.md schema for each):
 ## overview · ## technology stack · ## principles · ## file structure
 ## milestones · ## build & run · ## releasing · ## key bindings
+## constraints · ## non-goals · ## open questions · ## risks
+header lines after version (optional): status · owner · success metric
 -->
 

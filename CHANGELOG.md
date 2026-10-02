@@ -15,6 +15,10 @@ versioning follows [semantic versioning](https://semver.org/).
 - `[~]` in progress / partial roadmap status marker
 - conventions: agent-safety annotations, satellite docs, heading-numbering rule
 - worked examples for technology stack and file-structure sections
+- optional sections: constraints, non-goals, open questions, risks (adapted from the prd template)
+- milestone detail blocks (depends on, done when, verify) and a closing verification milestone convention
+- roadmap item-quality rule: discrete checks, verbatim values, `file:line` pointers, `(illustrative - confirm)` tag
+- optional header fields: status, owner, success metric
 
 ### changed
 
