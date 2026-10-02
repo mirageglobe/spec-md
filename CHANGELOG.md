@@ -9,6 +9,10 @@ versioning follows [semantic versioning](https://semver.org/).
 
 ## [unreleased]
 
+---
+
+## [0.2.0] - 2026-10-02
+
 ### added
 
 - optional sections: overview, principles, milestones (with worked examples)
