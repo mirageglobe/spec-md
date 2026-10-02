@@ -25,6 +25,7 @@ versioning follows [semantic versioning](https://semver.org/).
 
 - decisions may now use a `decision / choice / why` table for many entries (flat list still preferred for a few)
 - `template/SPEC.md`: version line, status legend, optional-sections pointer
+- website redesign: modern layout, light and dark themes, sticky nav, spec preview window, copy button for the starter command
 
 ---
 

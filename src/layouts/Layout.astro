@@ -13,40 +13,74 @@ const { title, description = 'a standard markdown format for technical project s
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="color-scheme" content="dark light" />
     <title>{title}</title>
-    <style>
+    <style is:global>
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+      /* dark first; light follows the system setting */
       :root {
-        --bg:       #0f0f0f;
-        --surface:  #1a1a1a;
-        --border:   #2a2a2a;
-        --text:     #e0e0e0;
-        --muted:    #888;
-        --accent:   #ffaf00;
-        --code-bg:  #141414;
-        --max-w:    720px;
+        --bg:      #0b0b0d;
+        --surface: #141419;
+        --raised:  #1b1b22;
+        --border:  #26262f;
+        --text:    #ececf1;
+        --muted:   #9a9aa8;
+        --accent:  #ffb020;
+        --accent2: #ff7a3d;
+        --blue:    #7cb8ff;
+        --green:   #6ee7a8;
+        --code-bg: #0f0f13;
+        --glow:    rgba(255, 176, 32, 0.14);
+        --sans: ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, Helvetica, Arial, sans-serif;
+        --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Courier New', monospace;
+        --wrap: 1040px;
       }
+
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg:      #fbfaf6;
+          --surface: #ffffff;
+          --raised:  #f3f1ea;
+          --border:  #e4e1d6;
+          --text:    #1b1b1f;
+          --muted:   #62626d;
+          --accent:  #b25e00;
+          --accent2: #d4430a;
+          --blue:    #1f5fbf;
+          --green:   #11804d;
+          --code-bg: #f6f4ee;
+          --glow:    rgba(255, 150, 0, 0.12);
+        }
+      }
+
+      html { scroll-behavior: smooth; }
 
       body {
-        background: var(--bg);
+        background: radial-gradient(900px 420px at 50% -120px, var(--glow), transparent), var(--bg);
+        background-repeat: no-repeat;
         color: var(--text);
-        font-family: 'Courier New', Courier, monospace;
-        font-size: 15px;
-        line-height: 1.7;
-        padding: 2rem 1.5rem 4rem;
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
       }
 
-      main {
-        max-width: var(--max-w);
-        margin: 0 auto;
-        padding: 0 1rem;
+      .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 1.5rem; }
+
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+      code, pre { font-family: var(--mono); }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        * { animation: none !important; transition: none !important; }
       }
     </style>
   </head>
   <body>
-    <main>
-      <slot />
-    </main>
+    <slot />
   </body>
 </html>
