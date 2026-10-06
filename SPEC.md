@@ -314,7 +314,16 @@ spec-md/
 
 ## 6. roadmap
 
-plans for spec-md are tracked outside this repo, in the maintainer's notes. this heading stays so the file still follows its own schema.
+- [~] `[spec]` single-list roadmap and `[mN]` milestone tag (0.3.0) [medium]
+- [ ] `[website]` render the schema reference from markdown [medium]
+- [ ] `[website]` gallery of real-world SPEC.md examples from open-source repos [medium]
+
+### ideas
+
+- [ ] `[spec]` optional header `type:` field (code, learning, log, personal) so tools know which optional layers apply [easy]
+- [ ] `[spec]` json schema / zod validator for SPEC.md lint [hard]
+- [ ] `[spec]` cli tool: `spec-md lint` checks a SPEC.md against the schema [hard]
+- [ ] `[website]` interactive schema explorer [medium]
 
 ---
 
