@@ -55,13 +55,11 @@ data flow: `scan` yields links, `probe` checks them concurrently (bounded worker
 
 <!-- status: [x] done · [~] in progress / partial · [ ] open -->
 
-### near term
-
-- [x] `[scan]` extract inline and reference-style links  [easy]
-- [x] `[probe]` head request with get fallback, 5s timeout  [easy]
 - [~] `[probe]` bounded worker pool, default 16 workers (illustrative - confirm)  [medium]
 - [ ] `[report]` `--format json` output with `file:line` per failure  [easy]
 - [ ] `[scan]` skip fenced code blocks  [easy]
+- [x] `[scan]` extract inline and reference-style links (2026-09-20)  [easy]
+- [x] `[probe]` head request with get fallback, 5s timeout (2026-09-24)  [easy]
 
 ### ideas
 

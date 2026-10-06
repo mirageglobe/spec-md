@@ -9,6 +9,16 @@ versioning follows [semantic versioning](https://semver.org/).
 
 ## [unreleased]
 
+### changed (breaking)
+
+- roadmap is now one ordered list with state on the checkbox (`[ ]` / `[~]` / `[x]` with a date), replacing the two `near term` / `ideas` tiers. `### ideas` is the only other heading allowed inside roadmap.
+- completed items are pruned at each release; the changelog is the record of what shipped, so the roadmap does not grow with history.
+- migration: delete the `### near term` heading and keep its items in priority order; leave `### ideas` as it is; tick finished items in place and add the date in brackets.
+
+### added
+
+- optional milestone tag `[m1]` linking a roadmap item to a row of the milestones table.
+
 ---
 
 ## [0.2.0] - 2026-10-02

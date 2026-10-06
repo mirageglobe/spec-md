@@ -26,7 +26,7 @@ spec-md defines the schema for a `SPEC.md` file. it establishes required and opt
 | section | heading | purpose |
 | :--- | :--- | :--- |
 | architecture | `## architecture` | high-level system design, components, data flow |
-| roadmap | `## roadmap` | two-tier task list (near term + ideas) |
+| roadmap | `## roadmap` | one ordered task list, state on the checkbox |
 | decisions | `## decisions` | key architectural choices and rationale |
 | complexity score | `## complexity score` | per-dimension complexity table |
 
@@ -64,14 +64,14 @@ ascii diagrams are preferred over external image links for portability.
 
 ### 3.2 roadmap
 
-two tiers only. no other headings inside roadmap.
+one ordered task list, highest priority first. state lives on the checkbox, so progress is shown by changing the box in place, never by moving an item between sections. the only other heading allowed inside roadmap is `### ideas`, for uncommitted work.
 
 ```markdown
 ## roadmap
 
-### near term
-- [ ] `[component]` concrete task  [easy]
-- [x] `[component]` completed task  [medium]
+- [~] `[component]` task in progress  [easy]
+- [ ] `[component]` task not started  [medium]
+- [x] `[component]` completed task (2026-10-06)  [medium]
 
 ### ideas
 - [ ] `[component]` exploratory, uncommitted idea  [hard]
@@ -81,11 +81,15 @@ two tiers only. no other headings inside roadmap.
 
 **difficulty tag** — one of `[easy]`, `[medium]`, `[hard]`. placed at end of line after two spaces.
 
-**status** — `[x]` completed, `[~]` in progress / partial, `[ ]` open. no other states.
+**status** — `[x]` completed, `[~]` in progress / partial, `[ ]` open. no other states. a completed item carries its date in brackets.
 
-near term: concrete, actively worked or planned. ideas: exploratory, no commitment.
+**pruning** - completed items stay in place only until the next release, then are deleted; the changelog is the record of what shipped. the roadmap therefore holds open work plus recent ticks, and does not grow with the project's history.
 
-**item quality** - each near-term item is one discrete, checkable outcome, not a theme. state exact values and copy verbatim ("hero pill reads 'next live cohort: late june 2026'", not "update the hero"). point at existing code as `path/file.ext:line`. a numeric threshold, weight or limit the owner has not decided is tagged `(illustrative - confirm)` so it is never read as a decision.
+**milestone tag** - optional `[m1]` in backticks, after the component tag, links an item to row 1 of the milestones table (3.9). use it only where the table exists.
+
+the list holds committed work in priority order; `### ideas` is exploratory, no commitment.
+
+**item quality** - each open item is one discrete, checkable outcome, not a theme. state exact values and copy verbatim ("hero pill reads 'next live cohort: late june 2026'", not "update the hero"). point at existing code as `path/file.ext:line`. a numeric threshold, weight or limit the owner has not decided is tagged `(illustrative - confirm)` so it is never read as a decision.
 
 ### 3.3 decisions
 
@@ -167,7 +171,7 @@ for larger projects, a phased delivery schedule layered above the roadmap. the r
 | 2 | TUI shell, playable loop | [ ] not started |
 ```
 
-milestones describe the schedule; the roadmap holds the actual tasks. do not duplicate task lists across both.
+milestones describe the schedule; the roadmap holds the actual tasks. do not duplicate task lists across both. link them with the milestone tag: a roadmap item tagged `[m1]` belongs to row 1 of the table.
 
 for a milestone that needs more than a status, add a detail block under the table. it states ordering and acceptance only; the tasks stay in the roadmap.
 
@@ -318,7 +322,8 @@ plans for spec-md are tracked outside this repo, in the maintainer's notes. this
 
 - **markdown over custom format**: portability and zero tooling required. any text editor, any agent.
 - **repo-root placement**: versioned with code; prevents wiki drift.
-- **two-tier roadmap**: near term forces prioritisation; ideas section captures intent without commitment.
+- **single ordered roadmap (0.3.0, breaking)**: one list in priority order with state on the checkbox, replacing the near term / ideas tiers. tiers by section meant moving items on every change, which people skip, so they went stale; a box changes in place and makes done / total countable. completed items are pruned at each release so the list does not grow. `ideas` stays as the one separate pile so uncommitted work never dilutes committed work.
+- **milestone tag links tasks to the table**: the milestones table defines each phase (focus, status, acceptance) but did not say which tasks belong to it; the `[mN]` tag adds that link without duplicating task lists.
 - **difficulty tags**: lets agents self-select appropriately scoped tasks without human triage.
 - **component tags**: scopes work to a subsystem; prevents agents from over-reaching.
 - **complexity score**: gives agents and reviewers a calibrated sense of risk before making changes.

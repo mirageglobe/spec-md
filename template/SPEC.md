@@ -15,8 +15,6 @@
 
 <!-- status: [x] done · [~] in progress / partial · [ ] open -->
 
-### near term
-
 - [ ] `[component]` task description  [easy]
 
 ### ideas
