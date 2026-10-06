@@ -23,29 +23,29 @@ spec-md defines the schema for a `SPEC.md` file. it establishes required and opt
 
 ### 2.1 required sections
 
-| section | heading | purpose |
-| :--- | :--- | :--- |
-| architecture | `## architecture` | high-level system design, components, data flow |
-| roadmap | `## roadmap` | one ordered task list, state on the checkbox |
-| decisions | `## decisions` | key architectural choices and rationale |
-| complexity score | `## complexity score` | per-dimension complexity table |
+| section          | heading               | purpose                                         |
+| :--------------- | :-------------------- | :---------------------------------------------- |
+| architecture     | `## architecture`     | high-level system design, components, data flow |
+| roadmap          | `## roadmap`          | one ordered task list, state on the checkbox    |
+| decisions        | `## decisions`        | key architectural choices and rationale         |
+| complexity score | `## complexity score` | per-dimension complexity table                  |
 
 ### 2.2 optional sections
 
-| section | heading | purpose |
-| :--- | :--- | :--- |
-| overview | `## overview` | tldr summary; expands the title blockquote |
-| technology stack | `## technology stack` | dependencies as name / version / purpose |
-| principles | `## principles` | scope-containment and no-drift rules for agents |
-| constraints | `## constraints` | what the project must build on and must not disturb |
-| non-goals | `## non-goals` | features deliberately excluded or deferred, with reason |
-| file structure | `## file structure` | annotated directory tree |
-| build & run | `## build & run` | local setup and run commands |
-| milestones | `## milestones` | phased delivery schedule for larger projects |
-| releasing | `## releasing` | version bump and publish steps |
-| key bindings | `## key bindings` | input mapping table (for interactive tools) |
-| open questions | `## open questions` | unknowns only the implementer can settle in-flight |
-| risks | `## risks` | what could fail, each tied to what will catch it |
+| section          | heading               | purpose                                                 |
+| :--------------- | :-------------------- | :------------------------------------------------------ |
+| overview         | `## overview`         | tldr summary; expands the title blockquote              |
+| technology stack | `## technology stack` | dependencies as name / version / purpose                |
+| principles       | `## principles`       | scope-containment and no-drift rules for agents         |
+| constraints      | `## constraints`      | what the project must build on and must not disturb     |
+| non-goals        | `## non-goals`        | features deliberately excluded or deferred, with reason |
+| file structure   | `## file structure`   | annotated directory tree                                |
+| build & run      | `## build & run`      | local setup and run commands                            |
+| milestones       | `## milestones`       | phased delivery schedule for larger projects            |
+| releasing        | `## releasing`        | version bump and publish steps                          |
+| key bindings     | `## key bindings`     | input mapping table (for interactive tools)             |
+| open questions   | `## open questions`   | unknowns only the implementer can settle in-flight      |
+| risks            | `## risks`            | what could fail, each tied to what will catch it        |
 
 ---
 
@@ -259,10 +259,10 @@ the title blockquote may carry extra lines after `version`: `status` (draft, act
 
 ### audience split
 
-| file | audience | include | exclude |
-| :--- | :--- | :--- | :--- |
-| `README.md` | end users | features, quick start, ethos | internals, build steps, roadmap |
-| `SPEC.md` | developers, agents | architecture, decisions, roadmap | marketing prose, user-facing config |
+| file        | audience           | include                          | exclude                             |
+| :---------- | :----------------- | :------------------------------- | :---------------------------------- |
+| `README.md` | end users          | features, quick start, ethos     | internals, build steps, roadmap     |
+| `SPEC.md`   | developers, agents | architecture, decisions, roadmap | marketing prose, user-facing config |
 
 roadmap lives **exclusively** in `SPEC.md`. `README.md` links to it.
 
@@ -346,8 +346,8 @@ spec-md/
 
 ## 8. complexity score
 
-| dimension | score | notes |
-| :--- | :--- | :--- |
-| overall | 1 / 5 | content project; no runtime logic |
-| spec | 1 / 5 | prose schema, no code |
-| website | 2 / 5 | astro static site, markdown rendering |
+| dimension | score | notes                                 |
+| :-------- | :---- | :------------------------------------ |
+| overall   | 1 / 5 | content project; no runtime logic     |
+| spec      | 1 / 5 | prose schema, no code                 |
+| website   | 2 / 5 | astro static site, markdown rendering |
