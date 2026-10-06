@@ -1,7 +1,7 @@
 # SPEC — spec-md
 
 > a standard markdown format for technical project specifications.
-> version: 0.2.0
+> version: 0.3.0
 
 ---
 
@@ -314,7 +314,6 @@ spec-md/
 
 ## 6. roadmap
 
-- [~] `[spec]` single-list roadmap and `[mN]` milestone tag (0.3.0) [medium]
 - [ ] `[website]` render the schema reference from markdown [medium]
 - [ ] `[website]` gallery of real-world SPEC.md examples from open-source repos [medium]
 

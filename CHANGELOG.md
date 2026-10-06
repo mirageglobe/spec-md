@@ -9,6 +9,10 @@ versioning follows [semantic versioning](https://semver.org/).
 
 ## [unreleased]
 
+---
+
+## [0.3.0] - 2026-10-06
+
 ### changed (breaking)
 
 - roadmap is now one ordered list with state on the checkbox (`[ ]` / `[~]` / `[x]` with a date), replacing the two `near term` / `ideas` tiers. `### ideas` is the only other heading allowed inside roadmap.
