@@ -9,6 +9,20 @@ versioning follows [semantic versioning](https://semver.org/).
 
 ## [unreleased]
 
+### added
+
+- yaml front matter header holding basic information: `version`, `stage`, optional `owner` and `success-metric`.
+- `stage`: one scale for software and business projects (idea, build, launched, steady; exits parked, done).
+- optional `## stage history` section: an append-only table (date, stage, round, note) so a redo keeps the record of earlier rounds. `round` lives only there.
+
+### changed
+
+- `stage` replaces `status` (draft, active, maintenance) in the header.
+
+### deprecated
+
+- the blockquote header lines `> version`, `> status`, `> success metric`; still accepted in 0.4.x. migration: move them into front matter and map `status` to `stage` (draft is idea or build, active is build or launched, maintenance is steady).
+
 ---
 
 ## [0.3.0] - 2026-10-06

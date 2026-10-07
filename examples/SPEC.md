@@ -1,9 +1,13 @@
+---
+version: 0.3.0
+owner: example
+stage: build
+success-metric: a 200-file docs folder is checked in under 10 seconds (illustrative - confirm)
+---
+
 # SPEC - linkcheck
 
 > a small cli that finds broken links in a folder of markdown files.
-> version: 0.3.0
-> status: active · owner: example
-> success metric: a 200-file docs folder is checked in under 10 seconds (illustrative - confirm)
 
 this is a worked example of a filled-out `SPEC.md`. the project is fictional; the layout is the point.
 

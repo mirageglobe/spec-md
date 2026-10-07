@@ -1,7 +1,12 @@
+---
+version: 0.1.0
+owner: [name]
+stage: idea
+---
+
 # SPEC — [project name]
 
 > [one-line description of the project]
-> version: 0.1.0
 
 ---
 
@@ -40,6 +45,6 @@ optional sections (add as needed; see SPEC.md schema for each):
 ## overview · ## technology stack · ## principles · ## file structure
 ## milestones · ## build & run · ## releasing · ## key bindings
 ## constraints · ## non-goals · ## open questions · ## risks
-header lines after version (optional): status · owner · success metric
+front matter (optional): success-metric · add ## stage history to record stage changes (see SPEC.md 3.15)
 -->
 
