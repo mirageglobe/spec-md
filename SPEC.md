@@ -1,7 +1,12 @@
+---
+version: 0.3.0
+owner: jimmy
+stage: launched
+---
+
 # SPEC — spec-md
 
 > a standard markdown format for technical project specifications.
-> version: 0.3.0
 
 ---
 
@@ -46,6 +51,7 @@ spec-md defines the schema for a `SPEC.md` file. it establishes required and opt
 | key bindings     | `## key bindings`     | input mapping table (for interactive tools)             |
 | open questions   | `## open questions`   | unknowns only the implementer can settle in-flight      |
 | risks            | `## risks`            | what could fail, each tied to what will catch it        |
+| stage history    | `## stage history`    | append-only record of stage changes and rounds          |
 
 ---
 
@@ -239,6 +245,23 @@ what could make the work fail, in two kinds: `[technical]` (the build itself bre
 - `[strategic]` buyers may ignore the routing and book a call anyway. caught by: the success metric in the header.
 ```
 
+### 3.15 stage history
+
+an optional, append-only record of a project's stage over time. the front matter holds the current `stage`; this section holds the past, so a redo does not erase what the first round was.
+
+stages: `idea`, `build`, `launched`, `steady`, plus two exits, `parked` (paused, can wake) and `done` (finished, nothing running). the words describe the thing, not the tech: `idea` is being thought through, `build` is being made or set up, `launched` is running in the real world and still being pushed, `steady` runs itself with upkeep only.
+
+```markdown
+## stage history
+| date | stage | round | note |
+| :--- | :--- | :--- | :--- |
+| 2026-08-10 | build | 1 | started |
+| 2026-09-15 | steady | 1 | landed |
+| 2026-10-07 | build | 2 | redo, design messy |
+```
+
+rules: one row per change, newest last; dates are ISO 8601; the last row must match the front matter `stage`. `round` starts at 1 and goes up when a project goes back to an earlier stage to be redone. it lives only in this table and is derived for display, never stored in front matter.
+
 ---
 
 ## 4. conventions
@@ -249,13 +272,20 @@ what could make the work fail, in two kinds: `[technical]` (the build itself bre
 
 ### header fields
 
-the title blockquote may carry extra lines after `version`: `status` (draft, active, maintenance), `owner`, and `success metric` (one measurable outcome that will be true if the work succeeds). add a success metric only if one genuinely exists; a vague one is worse than none.
+the header is yaml front matter at the top of the file, holding basic information only:
 
-```markdown
-> version: 0.2.0
-> status: active · owner: jimmy
-> success metric: cut discovery-call qualification time by 50%
+```yaml
+---
+version: 0.4.0
+owner: jimmy
+stage: build
+success-metric: cut discovery-call qualification time by 50%
+---
 ```
+
+`version` and `stage` are expected; `owner` and `success-metric` are optional. `stage` is one of idea, build, launched, steady, parked, done (see 3.15). `success-metric` is one measurable outcome that will be true if the work succeeds; add it only if one genuinely exists, a vague one is worse than none. the one-line description stays as the blockquote under the title.
+
+deprecated, still accepted in 0.4.x: the blockquote header lines `> version`, `> status` and `> success metric`. `status` maps to stage: draft is idea or build, active is build or launched, maintenance is steady.
 
 ### audience split
 
@@ -314,12 +344,13 @@ spec-md/
 
 ## 6. roadmap
 
+- [ ] `[spec]` cut 0.4.0 (front matter, stage, stage history) after the trial review on 2026-11-07 [easy]
 - [ ] `[website]` render the schema reference from markdown [medium]
 - [ ] `[website]` gallery of real-world SPEC.md examples from open-source repos [medium]
 
 ### ideas
 
-- [ ] `[spec]` optional header `type:` field (code, learning, log, personal) so tools know which optional layers apply [easy]
+- [ ] `[spec]` optional front matter `type:` field (code, learning, log, personal) so tools know which optional layers apply [easy]
 - [ ] `[spec]` json schema / zod validator for SPEC.md lint [hard]
 - [ ] `[spec]` cli tool: `spec-md lint` checks a SPEC.md against the schema [hard]
 - [ ] `[website]` interactive schema explorer [medium]
@@ -341,6 +372,7 @@ spec-md/
 - **principles section**: codifies scope-containment / no-drift rules. the highest-value section for keeping an agent in its lane; more directive than the roadmap.
 - **agent-safety annotations**: destructive sections (releasing, deploying, migrations) carry a human-gate callout so automation does not run them autonomously.
 - **satellite docs allowed**: a third doc (e.g. `DESIGN.md`) for domain content SPEC should not absorb; SPEC links out. two-file rule is the default, not a ceiling.
+- **stage in front matter, history in a section (0.4.0)**: front matter gives parsers one block for basic state (`version`, `owner`, `stage`) and is the common convention of static-site and note tools, at the cost of not being strict CommonMark. `stage` replaces `status` because draft / active / maintenance could not say a project had finished or paused, or tell building from launched. history is its own section because it grows; `round` lives only there, since a stored counter loses what round 1 was once a redo overwrites it, while an append-only log keeps every round.
 
 ---
 
