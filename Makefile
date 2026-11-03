@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help menu dev build preview upgrade
+.PHONY: help menu dev build preview test upgrade
 
 help:
 	@printf "\n  \033[33mspec-md\033[0m\n"
@@ -19,6 +19,8 @@ build: ## build static site to dist/
 
 preview: ## preview built site locally
 	npm run preview
+
+test: build ## check the site builds (no unit tests; a clean build is the check)
 
 upgrade: ## upgrade astro and dependencies
 	npx @astrojs/upgrade
